@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb:255, 255, 255;
+  }
+}
+
+body {
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+
+
+ :where(.css-dev-only-do-not-override-htwhyh).ant-drawer .ant-drawer-close{
+  color: #fff;
+  padding-bottom: 4px;
+  font-size: 1em;
+ }
+
+ :where(.css-dev-only-do-not-override-htwhyh).ant-collapse>.ant-collapse-item >.ant-collapse-header .ant-collapse-expand-icon{
+  color:#fff;
+ }
+ :where(.css-dev-only-do-not-override-htwhyh).ant-collapse>.ant-collapse-item >.ant-collapse-header{
+  padding: 5px 25px;
+ }
+ :where(.css-dev-only-do-not-override-htwhyh).ant-collapse-ghost >.ant-collapse-item >.ant-collapse-content >.ant-collapse-content-box {
+  padding-block: 4px;
+}
+:where(.css-dev-only-do-not-override-htwhyh).ant-collapse .ant-collapse-content>.ant-collapse-content-box {
+  padding: 16px 0px;
+}
+
+.fon{
+	background-image: url('/fon2.webp');
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+}
+
+.fon:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background: #000;
+	opacity: .4;
+	z-index: -1;
+}
