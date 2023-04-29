@@ -1,11 +1,15 @@
-import React from 'react'
+
 import { Modal } from 'antd'
-import { FormDataComp } from '../form/FormDataComp'
+import { FormChernoBeloeCvetnoe } from '../form/FormChernoBeloeCvetnoe'
+import { FormPredmety } from '../form/FormPredmety'
+import { FormFoto } from '../form/FormFoto'
+import { FormHolsty } from '../form/FormHolsty'
+import { FormReklama } from '../form/FormReklama'
 
 
 
-export const ModalComp = ({ isModalOpen, title, handleCancel }) => {
-
+const ModalComp = ({ isModalOpen, title, handleCancel, id }) => {
+	console.log('id:', id)
 	return (
 		<Modal
 			title={title}
@@ -14,8 +18,23 @@ export const ModalComp = ({ isModalOpen, title, handleCancel }) => {
 			centered
 			footer={null}
 		>
-			<FormDataComp title={title} handleCancel={handleCancel} />
-
+			{
+				id === 1 && <FormChernoBeloeCvetnoe title={title} handleCancel={handleCancel} />
+			}
+			{
+				id === 2 && <FormFoto title={title} handleCancel={handleCancel} />
+			}
+			{
+				id === 4 && <FormHolsty title={title} handleCancel={handleCancel} />
+			}
+			{
+				id === 5 && <FormPredmety title={title} handleCancel={handleCancel} />
+			}
+			{
+				id === 6 && <FormReklama title={title} handleCancel={handleCancel} />
+			}
 		</Modal>
 	)
 }
+
+export default ModalComp

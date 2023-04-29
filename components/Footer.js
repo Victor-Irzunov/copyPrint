@@ -232,7 +232,7 @@ const Footer = () => {
 						<a href='tel:80256862929'>+ 375 25 686-29-29</a>
 					</p>
 					<p className='flex items-center font-semibold mt-2'>
-						<PhoneOutlined className='rotate-[135deg]' /> + 375 17  323-15-30
+						<PhoneOutlined className='rotate-[135deg]' /> + 375 17 323-15-30
 					</p>
 					<div className='flex items-center mt-4'>
 						<Image

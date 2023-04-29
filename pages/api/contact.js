@@ -1,12 +1,14 @@
-import multer from 'multer';
-import fs from 'fs';
-import nodemailer from 'nodemailer';
-const upload = multer({ dest: 'uploads/' });
+import multer from 'multer'
+import fs from 'fs'
+import nodemailer from 'nodemailer'
+const upload = multer({ dest: 'uploads/' })
 export const config = {
   api: {
     bodyParser: false
   }
 }
+//если 500 смотри пароли приложений
+
 export default async function handler(req, res) {
   try {
     await new Promise((resolve, reject) => {
@@ -20,18 +22,26 @@ export default async function handler(req, res) {
       email,
       message,
       format,
+      storonnij,
       color,
       density,
       oformlenie,
       colorReshenie,
+      sposob,
       srok,
       count,
+      color_hex,
       tel,
       address,
+      vid,
+      razmer,
+      variant,
+      nanesenie,
+      razmer_nanesenie,
     } = req.body
 
-
     const files = req.files
+
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
@@ -45,21 +55,29 @@ export default async function handler(req, res) {
     // Send email
     const info = await transporter.sendMail({
       from: process.env.EMAIL,
-      to: email,
-      subject: 'Contact form submission',
+      to: address,
+      subject: 'Клиент отправил форму с сайта',
       text: `
       Письмо с сайта:
-        Имя: ${name}
+        Имя: ${name || ''}
         Почта: ${email}
         Телефон: ${tel}
-        Комментарий: ${message}
-        Формат бумаги: ${format}
-        Цвет печати: ${color}
-        Плотность бумаги:${density}
-        Послепечатное оформление: ${oformlenie}
-        Цветовое решение брошюровки: ${colorReshenie}
-        Срок изготовления: ${srok}
-        Число копий: ${count}
+        Кол-во сторон: ${storonnij || '-'}
+        Способ: ${sposob || '-'}
+        Вид: ${vid || '-'}
+        Нанесение: ${nanesenie || '-'}
+        Вариант изображения: ${variant || '-'}
+        Размер: ${razmer || '-'}
+        Размер нанесения: ${razmer_nanesenie || '-'}
+        Комментарий: ${message || '-'}
+        Формат бумаги: ${format || '-'}
+        Цвет печати: ${color || '-'}
+        Цвет: ${color_hex || '-'}
+        Плотность бумаги:${density || '-'}
+        Послепечатное оформление: ${oformlenie || '-'}
+        Цветовое решение брошюровки: ${colorReshenie || '-'}
+        Срок изготовления: ${srok || '-'}
+        Число копий: ${count || '-'}
 
         Клиент выбрал: ${address}
       `,
@@ -75,8 +93,6 @@ export default async function handler(req, res) {
         else console.log(`${file.originalname} was deleted successfully`);
       })
     })
-
-
     res.status(200).json({ message: 'Сообщение отправлено' });
   } catch (error) {
     res.status(500).json({ error: 'Ошибка в отправке сообщения' });

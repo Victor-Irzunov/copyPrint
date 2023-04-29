@@ -2,12 +2,15 @@ import Heading from '@component/components/Heading'
 import { HeaderInfo } from '@component/components/header/headerInfo/HeaderInfo'
 import Head from 'next/head'
 import { InfoCircleTwoTone, UpOutlined } from '@ant-design/icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 // import Image from 'next/image'
 import ServiceSection from '@component/components/sections/ServiceSection'
 import { FloatButton } from 'antd'
 import Image from 'next/image'
+import DostavkaSection from '@component/components/sections/DostavkaSection'
+import { CallSection } from '@component/components/sections/CallSection'
+import axios from 'axios'
 
 
 {/* <EnvironmentOutlined /> */ }
@@ -30,6 +33,14 @@ const Home = () => {
           key="desc"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <link rel="android-chrome-192x192" sizes="192x192" href="/android-chrome-192x192.png" />
+        <link rel="android-chrome-512x512" sizes="512x512" href="/android-chrome-512x512.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="shortcut icon" href="/apple-touch-icon.png" />
+
       </Head>
 
 
@@ -82,7 +93,12 @@ const Home = () => {
 
 
 
+
           <ServiceSection />
+
+          <DostavkaSection />
+
+          <CallSection />
         </div>
       </main >
     </>

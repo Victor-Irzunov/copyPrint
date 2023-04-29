@@ -37,37 +37,51 @@ export const sendOrderTelegram = async (obj) => {
 //  }
 
 
- export const sendFotosTelegram = async (obj) => {
-	 const files = obj.getAll('photo')
-	 const chat_id = obj.get('chat_id')
+export const sendFotosTelegram = async (obj) => {
+	const files = obj.getAll('photo')
+	const chat_id = obj.get('chat_id')
 	const results = []
 	for (const file of files) {
-	  if (file.size > 10 * 1024 * 1024) { 
-		 results.push({ error: `Файл ${file.name} слишком большой для отправки в Telegram` });
-		 continue;
-	  }
-	  const formData = new FormData()
-	  formData.append('chat_id', chat_id)
-	  formData.append('photo', file)
-	  try {
-		 const { data } = await axios.post(`https://api.telegram.org/bot${token}/sendPhoto`, formData, {
-			headers: {
-			  'Content-Type': 'multipart/form-data'
-			}
-		 })
-		 results.push({ data });
-	  } catch (error) {
-		 results.push({ error: `Ошибка отправки файла ${photo.name} в Telegram` });
-	  }
+		if (file.size > 10 * 1024 * 1024) {
+			results.push({ error: `Файл ${file.name} слишком большой для отправки в Telegram` });
+			continue;
+		}
+		const formData = new FormData()
+		formData.append('chat_id', chat_id)
+		formData.append('photo', file)
+		try {
+			const { data } = await axios.post(`https://api.telegram.org/bot${token}/sendPhoto`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			})
+			results.push({ data });
+		} catch (error) {
+			results.push({ error: `Ошибка отправки файла ${photo.name} в Telegram` });
+		}
 	}
 	return results
- }
+}
 
 
- 
- 
- 
- 
+export const sendMail = async (formData) => {
+	try {
+		const data = await axios.post('api/contact', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		})
+		return data
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+
+
+
+
+
 
 
 

@@ -3,37 +3,47 @@ import {
 	Form, Button, Input, Space, message, Radio, Select, InputNumber, Upload, Divider,
 } from 'antd'
 import InputMask from 'react-input-mask'
-import { sendFotosTelegram, sendOrderTelegram } from '../../http/telegramAPI'
+import { sendFotosTelegram, sendMail, sendOrderTelegram } from '../../http/telegramAPI'
 import { MinusOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons'
 import axios from 'axios'
+import dynamic from 'next/dynamic';
+
+const SketchPicker = dynamic(
+	() => import('react-color').then((mod) => mod.SketchPicker),
+	{ ssr: false }
+)
 
 const { TextArea } = Input
 
-export const FormDataComp = ({ handleCancel, title, }) => {
+export const FormPredmety = ({ handleCancel, title, }) => {
 	const [tel, setTel] = useState('')
 	const [countValue, setCountValue] = useState(null)
+	const [color, setColor] = useState()
+
 	const [form] = Form.useForm()
 
-
+	const handleChange = (color) => setColor(color)
+console.log('color:',color)
 	const onFinish = async (values) => {
 		console.log('values: ', values)
 
-		let messageForm = `<b>--- Заказ с сайта ---</b>\n`
-		messageForm += `<b> </b>\n`
-		messageForm += `<b> ${title} </b>\n`
-		messageForm += `<b> </b>\n`
-		messageForm += `<b>Формат бумаги:</b> ${values.format}\n`
-		messageForm += `<b>Цвет печати:</b> ${values.color}\n`
-		messageForm += `<b>Плотность бумаги:</b> ${values.density}\n`
-		messageForm += `<b>Послепечатное оформление:</b> ${values.oformlenie}\n`
-		messageForm += `<b>Цветовое решение брошюровки:</b> ${values.colorReshenie}\n`
-		messageForm += `<b>Срок изготовления:</b> ${values.srok}\n`
-		messageForm += `<b>Число копий:</b> ${countValue ? countValue : 0}\n`
-		messageForm += `<b>Имя и Фамилия:</b> ${values.name}\n`
-		messageForm += `<b>Почта:</b> ${values.email}\n`
-		messageForm += `<b>- - - - - - - - - - - - - - -</b>\n`
-		messageForm += `<b>Телефон:</b> ${values.tel}\n`
-		messageForm += `<b>Сообщение:</b> «${values.message}»\n`
+		// let messageForm = `<b>--- Заказ с сайта ---</b>\n`
+		// messageForm += `<b> </b>\n`
+		// messageForm += `<b> ${title} </b>\n`
+		// messageForm += `<b> </b>\n`
+		// messageForm += `<b>Формат бумаги:</b> ${values.format}\n`
+		// messageForm += `<b>Цвет печати:</b> ${values.color}\n`
+		// messageForm += `<b>Плотность бумаги:</b> ${values.density}\n`
+		// messageForm += `<b>Сторонний:</b> ${values.storonnij}\n`
+		// messageForm += `<b>Послепечатное оформление:</b> ${values.oformlenie}\n`
+		// messageForm += `<b>Цветовое решение брошюровки:</b> ${values.colorReshenie}\n`
+		// messageForm += `<b>Срок изготовления:</b> ${values.srok}\n`
+		// messageForm += `<b>Число копий:</b> ${countValue ? countValue : 0}\n`
+		// messageForm += `<b>Имя и Фамилия:</b> ${values.name}\n`
+		// messageForm += `<b>Почта:</b> ${values.email}\n`
+		// messageForm += `<b>- - - - - - - - - - - - - - -</b>\n`
+		// messageForm += `<b>Телефон:</b> ${values.tel}\n`
+		// messageForm += `<b>Сообщение:</b> «${values.message}»\n`
 
 
 
@@ -43,7 +53,7 @@ export const FormDataComp = ({ handleCancel, title, }) => {
 		formData.append("chat_id", chat_id)
 
 		formData.append("format", values.format ? values.format : '-')
-		formData.append("color", values.color ? values.color : '-')
+		formData.append("color_hex", color.hex ? color.hex : '-')
 		formData.append("density", values.density ? values.density : '-')
 		formData.append("oformlenie", values.oformlenie ? values.oformlenie : '-')
 		formData.append("colorReshenie", values.colorReshenie ? values.colorReshenie : '-')
@@ -54,55 +64,42 @@ export const FormDataComp = ({ handleCancel, title, }) => {
 		formData.append("email", values.email)
 		formData.append("message", values.message ? values.message : '-')
 		formData.append("address", values.address)
+		formData.append("storonnij", values.storonnij ? values.storonnij : '-')
+		formData.append("nanesenie", values.nanesenie ? values.nanesenie : '-')
+		formData.append("razmer", values.razmer ? values.razmer : '-')
+		formData.append("razmer_nanesenie", values.razmer_nanesenie ? values.razmer_nanesenie : '-')
 
 		if (values.attachments && values.attachments.length > 0) {
 			for (let i = 0; i < values.attachments.length; i++) {
 				formData.append('attachments', values.attachments[i].originFileObj)
 			}
 		}
-		if (values.attachments && values.attachments.length > 0) {
-			for (let i = 0; i < values.attachments.length; i++) {
-				formData.append('photo', values.attachments[i].originFileObj)
-			}
-		}
-	
-
-		// try {
-		// 	axios.post('api/contact', formData, {
-		// 		headers: {
-		// 			'Content-Type': 'multipart/form-data'
-		// 		}
-		// 	})
-		// 		.then(data => {
-		// 			if (data.status === 200) {
-		// 				message.success(data.data.message)
-		// 				// handleCancel()
-		// 				// form.resetFields()
-
-		// 			} else {
-		// 				message.error(data.data.message)
-		// 			}
-		// 		})
-		// } catch (error) {
-		// 	console.error(error);
+		// if (values.attachments && values.attachments.length > 0) {
+		// 	for (let i = 0; i < values.attachments.length; i++) {
+		// 		formData.append('photo', values.attachments[i].originFileObj)
+		// 	}
 		// }
 
+		sendMail(formData)
+		.then(data => {
+			if (data.status === 200) {
+				message.success(data.data.message)
+				handleCancel()
+				form.resetFields()
+			} else {
+				message.error(data.data.message)
+			}
+		})
 
 		// sendOrderTelegram(messageForm)
 		// 	.then(data => {
 		// 		if (data.ok) {
 		// 		}
 		// 	})
-
-
-		sendFotosTelegram(formData)
-			.then(data => {
-				console.log('data: ', data)
-			})
-
-
-
-
+		// sendFotosTelegram(formData)
+		// 	.then(data => {
+		// 		console.log('data: ', data)
+		// 	})
 	}
 
 	const onFinishFailed = (errorInfo) => {
@@ -125,14 +122,12 @@ export const FormDataComp = ({ handleCancel, title, }) => {
 			selection
 		}
 	}
-
 	const minus = () => {
 		setCountValue(prev => prev !== 0 ? prev - 1 : 0)
 	}
 	const plus = () => {
 		setCountValue(prev => prev + 1)
 	}
-
 
 	return (
 		<div className='overflow-hidden	overflow-x-hidden'>
@@ -144,7 +139,6 @@ export const FormDataComp = ({ handleCancel, title, }) => {
 				wrapperCol={{
 					span: 24,
 				}}
-
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				autoComplete="off"
@@ -168,118 +162,114 @@ export const FormDataComp = ({ handleCancel, title, }) => {
 						</Space>
 					</Radio.Group>
 				</Form.Item>
-
 				<Divider />
-
-
 				<Form.Item
-					label='Формат бумаги'
-					name="format"
+					label='Нанесение на'
+					name="nanesenie"
 				>
-					<Radio.Group>
-						<Space direction="vertical">
-							<Radio value='A4'>A4</Radio>
-							<Radio value='A3'>A3</Radio>
-							<Radio value='комбинированная'>комбинированная (уточнение в комментариях)</Radio>
-						</Space>
-					</Radio.Group>
+					<Select
+						options={[
+							{
+								value: 'Кружка',
+								label: 'Кружка',
+							},
+							{
+								value: 'Футболка',
+								label: 'Футболка',
+							},
+							{
+								value: 'Cвитшот',
+								label: 'Cвитшот',
+							},
+							{
+								value: 'Толстовка',
+								label: 'Толстовка',
+							},
+							{
+								value: 'Шопер',
+								label: 'Шопер',
+							},
+							{
+								value: 'Магнит виниловый',
+								label: 'Магнит виниловый',
+							},
+							{
+								value: 'Магнит акриловый',
+								label: 'Магнит акриловый',
+							},
+							{
+								value: 'Значок',
+								label: 'Значок',
+							},
+							{
+								value: 'Брелок',
+								label: 'Брелок',
+							},
+						]}
+					/>
 				</Form.Item>
-
 				<Form.Item
-					label='Цвет печати'
+					label='Цвет'
 					name="color"
+					className='mt-8 mb-6 z-50'
 				>
-					<Select
-						options={[
-							{
-								value: 'черно-белая',
-								label: 'Черно-белая',
-							},
-							{
-								value: 'цветная',
-								label: 'Цветная',
-							},
-							{
-								value: 'комбинированная',
-								label: 'Комбинированная (черно-белая и цветная)',
-							},
-						]}
+					<SketchPicker
+						color={color}
+						onChangeComplete={handleChange}
 					/>
 				</Form.Item>
-
 				<Form.Item
-					label='Плотность бумаги'
-					name="density"
+					label='Размер изделия'
+					name="razmer"
 					tooltip=""
 				>
 					<Select
 						options={[
 							{
-								value: '80мг/m2(стандартная)',
-								label: '80мг/m2(стандартная)',
+								value: 'M',
+								label: 'M',
 							},
 							{
-								value: '160мг/m2(плотная)',
-								label: '160мг/m2(плотная)',
+								value: 'S',
+								label: 'S',
 							},
 							{
-								value: '250мг/m2(плотная)',
-								label: '250мг/m2(плотная)',
+								value: 'L',
+								label: 'L',
 							},
 							{
-								value: 'другая (в комментариях)',
-								label: 'другая (в комментариях)',
+								value: 'XL',
+								label: 'XL',
+							},
+							{
+								value: '2XL',
+								label: '2XL',
+							},
+							{
+								value: '3XL',
+								label: '3XL',
+							},
+							{
+								value: 'Другой',
+								label: 'Другой',
 							},
 						]}
 					/>
 				</Form.Item>
-
 				<Form.Item
-					label='Послепечатное оформление'
-					name="oformlenie"
-					tooltip=""
-				>
-					<Select
-						options={[
-							{
-								value: 'брошюровка на пластиковую пружину',
-								label: 'брошюровка на пластиковую пружину',
-							},
-							{
-								value: 'брошюровка на металлическую пружину',
-								label: 'брошюровка на металлическую пружину',
-							},
-							{
-								value: 'сшивание скобой (степлер)',
-								label: 'сшивание скобой (степлер)',
-							},
-							{
-								value: 'папка-скоросшиватель',
-								label: 'папка-скоросшиватель (цвет уточните в комментариях)',
-							},
-							{
-								value: 'ламинирование',
-								label: 'ламинирование',
-							},
-						]}
-					/>
-				</Form.Item>
-
-				<Form.Item
-					label='Цветовое решение брошюровки'
-					name="colorReshenie"
+					label='Размер нанесения'
+					name="razmer_nanesenie"
+					className='mt-8 mb-6'
 				>
 					<Radio.Group>
 						<Space direction="vertical">
-							<Radio value='черный'>черный</Radio>
-							<Radio value='белый'>белый</Radio>
-							<Radio value='красный'>красный</Radio>
-							<Radio value='синий'>синий</Radio>
-							<Radio value='зелёный'>зелёный</Radio>
+							<Radio value='А6'>А6</Radio>
+							<Radio value='А5'>А5</Radio>
+							<Radio value='А4'>А4</Radio>
+							<Radio value='А3'>А3</Radio>
 						</Space>
 					</Radio.Group>
 				</Form.Item>
-
 				<Form.Item
 					label='Срок изготовления'
 					name="srok"

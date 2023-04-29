@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Input, message } from 'antd'
+import { Form, Button, Radio, message, Space } from 'antd'
 import InputMask from 'react-input-mask'
 import { sendOrderTelegram } from '../../http/telegramAPI'
 
@@ -10,6 +10,7 @@ export const FormTel = ({ btn = 'Жду звонка', onClose }) => {
 
 		let messageForm = `<b>Клиент с сайта просит перезвонить</b>\n`
 		messageForm += `<b> </b>\n`
+		messageForm += `<b>Адрес выбрал пользователь:</b> ${values.address}\n`
 		messageForm += `<b>Телефон:</b> ${values.tel}\n`
 
 		sendOrderTelegram(messageForm)
@@ -52,6 +53,26 @@ export const FormTel = ({ btn = 'Жду звонка', onClose }) => {
 				onFinishFailed={onFinishFailed}
 				autoComplete="off"
 			>
+				<Form.Item
+					label='Выберите адрес печатного центра'
+					name="address"
+					className='mb-6'
+					rules={[
+						{
+							required: true,
+							message: 'Пожалуйста удобный для Вас адрес!',
+						},
+					]}
+				>
+					<Radio.Group>
+						<Space direction="vertical">
+							<Radio value='г.Минск, ул. Ульяновская, д.30'>г.Минск, ул. Ульяновская, д.30</Radio>
+							<Radio value='г.Минск, пр-т Дзержинского, д.104'>г.Минск, пр-т Дзержинского, д.104</Radio>
+							<Radio value='г.Минск, пр-т Машерова, д.54'>г.Минск, пр-т Машерова, д.54</Radio>
+						</Space>
+					</Radio.Group>
+				</Form.Item>
+
 				<Form.Item
 					label='Телефон'
 					name="tel"
