@@ -18,24 +18,24 @@ export const FormChernoBeloeCvetnoe = ({ handleCancel, title, }) => {
 	const onFinish = async (values) => {
 		console.log('values: ', values)
 
-		let messageForm = `<b>--- Заказ с сайта ---</b>\n`
-		messageForm += `<b> </b>\n`
-		messageForm += `<b> ${title} </b>\n`
-		messageForm += `<b> </b>\n`
-		messageForm += `<b>Формат бумаги:</b> ${values.format}\n`
-		messageForm += `<b>Цвет печати:</b> ${values.color}\n`
-		messageForm += `<b>Плотность бумаги:</b> ${values.density}\n`
-		messageForm += `<b>Кол-во сторон:</b> ${values.storonnij || ''}\n`
-		messageForm += `<b>Сторонний:</b> ${values.storonnij}\n`
-		messageForm += `<b>Послепечатное оформление:</b> ${values.oformlenie}\n`
-		messageForm += `<b>Цветовое решение брошюровки:</b> ${values.colorReshenie}\n`
-		messageForm += `<b>Срок изготовления:</b> ${values.srok}\n`
-		messageForm += `<b>Число копий:</b> ${countValue ? countValue : 1}\n`
-		messageForm += `<b>Имя и Фамилия:</b> ${values.name}\n`
-		messageForm += `<b>Почта:</b> ${values.email}\n`
-		messageForm += `<b>- - - - - - - - - - - - - - -</b>\n`
-		messageForm += `<b>Телефон:</b> ${values.tel}\n`
-		messageForm += `<b>Сообщение:</b> «${values.message}»\n`
+		// let messageForm = `<b>--- Заказ с сайта ---</b>\n`
+		// messageForm += `<b> </b>\n`
+		// messageForm += `<b> ${title} </b>\n`
+		// messageForm += `<b> </b>\n`
+		// messageForm += `<b>Формат бумаги:</b> ${values.format}\n`
+		// messageForm += `<b>Цвет печати:</b> ${values.color}\n`
+		// messageForm += `<b>Плотность бумаги:</b> ${values.density}\n`
+		// messageForm += `<b>Кол-во сторон:</b> ${values.storonnij || ''}\n`
+		// messageForm += `<b>Сторонний:</b> ${values.storonnij}\n`
+		// messageForm += `<b>Послепечатное оформление:</b> ${values.oformlenie}\n`
+		// messageForm += `<b>Цветовое решение брошюровки:</b> ${values.colorReshenie}\n`
+		// messageForm += `<b>Срок изготовления:</b> ${values.srok}\n`
+		// messageForm += `<b>Число копий:</b> ${countValue ? countValue : 1}\n`
+		// messageForm += `<b>Имя и Фамилия:</b> ${values.name}\n`
+		// messageForm += `<b>Почта:</b> ${values.email}\n`
+		// messageForm += `<b>- - - - - - - - - - - - - - -</b>\n`
+		// messageForm += `<b>Телефон:</b> ${values.tel}\n`
+		// messageForm += `<b>Сообщение:</b> «${values.message}»\n`
 
 
 
@@ -91,6 +91,7 @@ export const FormChernoBeloeCvetnoe = ({ handleCancel, title, }) => {
 
 		sendMail(formData)
 			.then(data => {
+				console.log('data:', data)
 				if (data.status === 200) {
 					message.success(data.data.message)
 					handleCancel()

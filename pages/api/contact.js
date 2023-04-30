@@ -45,14 +45,15 @@ export default async function handler(req, res) {
       port: 587,
       secure: false,
       auth: {
-        user: 'serviceprintfoto4@gmail.com',
-        pass: 'beugrtuuiprrdwjw',
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASS,
       },
     })
+    console.log('process.env.EMAIL_PASS:', process.env.EMAIL_PASS)
     console.log('-req.body---2', req.body)
     // Send email
     const info = await transporter.sendMail({
-      from: 'serviceprintfoto4@gmail.com',
+      from: process.env.EMAIL,
       to: email,
       subject: 'Клиент отправил форму с сайта',
       text: `
@@ -84,7 +85,7 @@ export default async function handler(req, res) {
       }),
     })
     console.log('--process.env.EMAIL--3', process.env.EMAIL)
-    console.log('---res:', res)
+    console.log('---info:', info)
     // Delete uploaded files
     files.forEach(file => {
       fs.unlink(file.path, error => {

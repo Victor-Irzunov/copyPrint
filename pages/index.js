@@ -63,7 +63,6 @@ const Home = () => {
               :
               null
           }
-
           <div
             className={`text-center z-10 relative mt-3 ${!isActive ? 'animate-bounce' : ''}`}
             onClick={() => setIsActive(i => !i)}
