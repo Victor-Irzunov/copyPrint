@@ -45,14 +45,14 @@ export default async function handler(req, res) {
       port: 587,
       secure: false,
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASS,
+        user: 'serviceprintfoto4@gmail.com',
+        pass: 'beugrtuuiprrdwjw',
       },
     })
     console.log('-req.body---2', req.body)
     // Send email
     const info = await transporter.sendMail({
-      from: process.env.EMAIL,
+      from: 'serviceprintfoto4@gmail.com',
       to: email,
       subject: 'Клиент отправил форму с сайта',
       text: `
