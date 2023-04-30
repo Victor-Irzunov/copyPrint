@@ -40,7 +40,7 @@ const ServiceSection = () => {
 	return (
 		<section
 			className=" backdrop-blur-xl
-			dark:bg-[#414141]/40 pt-5 pb-4 z-10 relative mb-20"
+			dark:bg-[#414141]/40 pt-5 pb-4 z-10 relative mb-10"
 		>
 			<div className="container mx-auto relative py-8" id="service">
 				<h2 className="text-white text-2xl mb-10 text-center uppercase">

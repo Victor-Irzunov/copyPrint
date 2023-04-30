@@ -30,7 +30,7 @@ export const FormChernoBeloeCvetnoe = ({ handleCancel, title, }) => {
 		messageForm += `<b>Послепечатное оформление:</b> ${values.oformlenie}\n`
 		messageForm += `<b>Цветовое решение брошюровки:</b> ${values.colorReshenie}\n`
 		messageForm += `<b>Срок изготовления:</b> ${values.srok}\n`
-		messageForm += `<b>Число копий:</b> ${countValue ? countValue : 0}\n`
+		messageForm += `<b>Число копий:</b> ${countValue ? countValue : 1}\n`
 		messageForm += `<b>Имя и Фамилия:</b> ${values.name}\n`
 		messageForm += `<b>Почта:</b> ${values.email}\n`
 		messageForm += `<b>- - - - - - - - - - - - - - -</b>\n`

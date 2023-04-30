@@ -2,7 +2,7 @@ import { CheckOutlined } from '@ant-design/icons'
 
 const DostavkaSection = () => {
 	return (
-		<section className='py-6 my-14 relative' id='dostavka'>
+		<section className='py-6 my-4 relative' id='dostavka'>
 			<div className='container mx-auto text-white'>
 
 

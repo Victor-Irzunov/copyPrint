@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useState } from "react"
 import Image from "next/image"
-import { useRouter } from "next/router"
 import { MenuOutlined } from '@ant-design/icons'
 import { Drawer } from 'antd'
 import { Link as LinkScroll } from 'react-scroll'
 
-
+// const { useState } = await import("react")
 const navigation = [
 	{ id: 1, title: 'Главная', to: 'main' },
 	{ id: 2, title: 'Услуги', to: 'service' },
@@ -19,25 +18,20 @@ const navigation = [
 	{ id: 10, title: 'Допечатные услуги', to: '9' },
 	{ id: 11, title: 'Доставка', to: 'dostavka' },
 	{ id: 12, title: 'Контакты', to: 'contact' },
-	
 ]
-
 const NavBar = () => {
-	const { pathname } = useRouter()
-
 	const [open, setOpen] = useState(false);
 	const showDrawer = () => {
 		setOpen(true);
-	};
+	}
 	const onClose = () => {
 		setOpen(false);
-	};
+	}
 
 	return (
 		<div className='z-20 relative'>
 			<nav
 				className="py-3
-				
 			   z-20 shadow-xl
 				bg-white
 			  "
@@ -55,7 +49,6 @@ const NavBar = () => {
 					onClick={showDrawer}
 				/>
 			</div>
-
 			<Drawer
 				title={<span className='uppercase text-white text-xl font-light ml-1'>меню</span>}
 				placement="right"
@@ -87,5 +80,4 @@ const NavBar = () => {
 		</div>
 	)
 }
-
 export default NavBar

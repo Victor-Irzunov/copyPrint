@@ -76,9 +76,9 @@ export const HeaderInfo = ({ setIsVisible }) => {
 										>
 											696 68 60
 										</a>
-										<Image src='/a1.svg' width='20' height='20' className='mr-2' />
-										<Image src='/life.svg' width='30' height='30' className='mr-2' />
-										<Image src='/mts.svg' width='50' height='50' />
+										<Image src='/a1.svg' alt='иконка a1' width='20' height='20' className='mr-2' />
+										<Image src='/life.svg' alt='иконка life' width='30' height='30' className='mr-2' />
+										<Image src='/mts.svg'  alt='иконка mts' width='50' height='50' />
 
 										{/* <a href='tel:80336966860'
 													className='text-base mb-1 pl-2'
@@ -99,9 +99,9 @@ export const HeaderInfo = ({ setIsVisible }) => {
 								</Panel>
 								<Panel header={<span className='text-white font-extralight'>г.Минск, пр-т Дзержинского, д.104</span>} key="2">
 									<div className='flex justify-center text-white items-center'>
-										<Image src='/a1.svg' width='20' height='20' className='mr-2' />
-										<Image src='/life.svg' width='30' height='30' className='mr-2' />
-										<Image src='/mts.svg' width='45' height='45' />
+										<Image src='/a1.svg' alt='иконка a1' width='20' height='20' className='mr-2' />
+										<Image src='/life.svg' alt='иконка life' width='30' height='30' className='mr-2' />
+										<Image src='/mts.svg'alt='иконка mts' width='45' height='45' />
 										<a href='tel:80447834045'
 											className='text-base ml-2'
 										>
@@ -127,9 +127,9 @@ export const HeaderInfo = ({ setIsVisible }) => {
 								</Panel>
 								<Panel header={<span className='text-white font-extralight'>г.Минск, пр-т Машерова, д.54</span>} key="3">
 									<div className='flex justify-center text-white items-center'>
-										<Image src='/a1.svg' width='20' height='20' className='mr-2' />
-										<Image src='/life.svg' width='30' height='30' className='mr-2' />
-										<Image src='/mts.svg' width='45' height='45' />
+										<Image src='/a1.svg'alt='иконка a1' width='20' height='20' className='mr-2' />
+										<Image src='/life.svg' alt='иконка life' width='30' height='30' className='mr-2' />
+										<Image src='/mts.svg' alt='иконка mts' width='45' height='45' />
 										<a href='tel:80296862929'
 											className='text-base ml-2'
 										>

@@ -8,9 +8,9 @@ export const config = {
   }
 }
 //если 500 смотри пароли приложений
-
 export default async function handler(req, res) {
   try {
+    console.log('----1')
     await new Promise((resolve, reject) => {
       upload.any()(req, res, error => {
         if (error) reject(error);
@@ -39,9 +39,7 @@ export default async function handler(req, res) {
       nanesenie,
       razmer_nanesenie,
     } = req.body
-
     const files = req.files
-
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
@@ -50,12 +48,12 @@ export default async function handler(req, res) {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASS,
       },
-    });
-
+    })
+    console.log('-req.body---2', req.body)
     // Send email
     const info = await transporter.sendMail({
       from: process.env.EMAIL,
-      to: address,
+      to: email,
       subject: 'Клиент отправил форму с сайта',
       text: `
       Письмо с сайта:
@@ -85,7 +83,8 @@ export default async function handler(req, res) {
         return ({ filename: file.originalname, content: fs.createReadStream(file.path) })
       }),
     })
-
+    console.log('--process.env.EMAIL--3', process.env.EMAIL)
+    console.log('---res:', res)
     // Delete uploaded files
     files.forEach(file => {
       fs.unlink(file.path, error => {

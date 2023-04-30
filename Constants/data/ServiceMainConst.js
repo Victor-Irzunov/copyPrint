@@ -272,37 +272,37 @@ export const dataMainService = [
 						<div className='px-4 flex flex-col justify-between items-center'>
 							<div className='flex justify-between items-center w-full'>
 								<div>
-									<Image src='/holst1.webp' width='150' height='150' />
+									<Image src='/holst1.webp' alt='изображение на холсте' width='150' height='150' />
 									<p className=''>Метрика</p>
 								</div>
 								<div>
-									<Image src='/holst2.webp' width='150' height='150' />
+									<Image src='/holst2.webp' alt='изображение на холсте' width='150' height='150' />
 									<p className=''>Коллаж</p>
 								</div>
 							</div>
 							<div className='flex justify-between items-center w-full'>
 								<div>
-									<Image src='/holst3.webp' width='150' height='150' />
+									<Image src='/holst3.webp' alt='изображение на холсте' width='150' height='150' />
 									<p>Ваше фото</p>
 								</div>
 								<div>
-									<Image src='/holst4.webp' width='150' height='150' />
+									<Image src='/holst4.webp' alt='изображение на холсте' width='150' height='150' />
 									<p>Love is</p>
 								</div>
 							</div>
 							<div className='flex justify-between items-center w-full'>
 								<div>
-									<Image src='/holst5.webp' width='150' height='150' />
+									<Image src='/holst5.webp' alt='изображение на холсте' width='150' height='150' />
 									<p>Модульные картины</p>
 								</div>
 								<div>
-									<Image src='/holst6.webp' width='150' height='150' />
+									<Image src='/holst6.webp' alt='изображение на холсте' width='150' height='150' />
 									<p>Instagram</p>
 								</div>
 							</div>
 							<div className='flex justify-between items-center w-full'>
 								<div>
-									<Image src='/holst7.webp' width='150' height='150' />
+									<Image src='/holst7.webp' alt='изображение на холсте' width='150' height='150' />
 									<p>Polaroid</p>
 								</div>
 

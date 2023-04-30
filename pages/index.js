@@ -7,10 +7,10 @@ import { motion } from 'framer-motion'
 // import Image from 'next/image'
 import ServiceSection from '@component/components/sections/ServiceSection'
 import { FloatButton } from 'antd'
-import Image from 'next/image'
+// import Image from 'next/image'
 import DostavkaSection from '@component/components/sections/DostavkaSection'
 import { CallSection } from '@component/components/sections/CallSection'
-import axios from 'axios'
+// import axios from 'axios'
 
 
 {/* <EnvironmentOutlined /> */ }
@@ -19,7 +19,7 @@ import axios from 'axios'
 // };
 
 const Home = () => {
-  const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(true)
 
   return (
     <>
@@ -75,16 +75,13 @@ const Home = () => {
                 <div className='flex flex-col text-white'>
                   <InfoCircleTwoTone twoToneColor="#eb2f96" className='xyy:text-2xl sm:text-3xl' />
                 </div>
-
             }
           </div>
-
-
 
           <div className='container mx-auto z-20 relative mt-10'>
             <Heading text='Печатный центр в Минске' size='text-4xl' />
 
-            <div className='h-[60vh] mt-5'>
+            <div className='h-[20vh] mt-5'>
               <p className='text-white font-light'>
                 Лучшая <span className='text-yellow-400 font-normal'>цена</span> на печатные услуги в Минске
               </p>
