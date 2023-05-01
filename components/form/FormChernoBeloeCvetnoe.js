@@ -7,6 +7,7 @@ import { sendFotosTelegram, sendMail, sendOrderTelegram } from '../../http/teleg
 import { MinusOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons'
 import axios from 'axios'
 
+
 const { TextArea } = Input
 
 export const FormChernoBeloeCvetnoe = ({ handleCancel, title, }) => {
@@ -100,6 +101,8 @@ export const FormChernoBeloeCvetnoe = ({ handleCancel, title, }) => {
 					message.error(data.data.message)
 				}
 			})
+		
+
 
 
 		// sendOrderTelegram(messageForm)

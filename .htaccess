@@ -1,7 +1,7 @@
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/brigadyb/vdom"
+PassengerAppRoot "/home/vitechsi/minsk"
 PassengerBaseURI "/"
-PassengerNodejs "/home/brigadyb/nodevenv/vdom/18/bin/node"
+PassengerNodejs "/home/vitechsi/nodevenv/minsk/18/bin/node"
 PassengerAppType node
 PassengerStartupFile app.js
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
@@ -18,6 +18,9 @@ PassengerStartupFile app.js
 
   # Rewrite requests for the root to index.html
   RewriteRule ^$ .next/server/pages/index.html [L]
+
+  # Rewrite API requests to the external domain
+  RewriteRule ^api/(.*)$ https://vi-tech.by/api/$1 [P,L]
 
   # Rewrite all other requests to .html files
   RewriteCond %{REQUEST_FILENAME} !-f
