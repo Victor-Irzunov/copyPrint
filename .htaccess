@@ -1,15 +1,56 @@
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+
+# PassengerAppRoot "/home/vitechsi/minsk"
+# PassengerBaseURI "/"
+# PassengerNodejs "/home/vitechsi/nodevenv/minsk/18/bin/node"
+# PassengerAppType node
+# PassengerStartupFile server.js
+
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+
+#   # Rewrite requests for images to the root
+#   RewriteRule ^_next/image(.*)$ /$1 [L]
+
+#   # Rewrite all other requests to .next/server/pages directory
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^(.*)$ .next/server/pages/$1.html [L]
+
+#   # Rewrite requests for the root to index.html
+#   RewriteRule ^$ .next/server/pages/index.html [L]
+
+#   # Rewrite API requests to the external domain
+#   RewriteRule ^api/(.*)$ https://vi-tech.site/api/$1 [L]
+
+#   # Rewrite all other requests to .html files
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^(.*)$ /$1.html [L]
+# </IfModule>
 PassengerAppRoot "/home/vitechsi/minsk"
 PassengerBaseURI "/"
 PassengerNodejs "/home/vitechsi/nodevenv/minsk/18/bin/node"
 PassengerAppType node
-PassengerStartupFile app.js
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+PassengerStartupFile server.js
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
   # Rewrite requests for images to the root
   RewriteRule ^_next/image(.*)$ /$1 [L]
+
+  # Rewrite API requests to the external domain
+  RewriteRule ^api/(.*)$ https://vi-tech.site/api/$1 [L]
+
+  # Rewrite all other requests to .html files
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /$1.html [L]
+
+  # Rewrite requests to /api/* to Next.js API handlers
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^api/(.*)$ /_next/serverless/pages/api/$1.js [NC,L]
 
   # Rewrite all other requests to .next/server/pages directory
   RewriteCond %{REQUEST_FILENAME} !-f
@@ -18,12 +59,4 @@ PassengerStartupFile app.js
 
   # Rewrite requests for the root to index.html
   RewriteRule ^$ .next/server/pages/index.html [L]
-
-  # Rewrite API requests to the external domain
-  RewriteRule ^api/(.*)$ https://vi-tech.by/api/$1 [P,L]
-
-  # Rewrite all other requests to .html files
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ /$1.html [L]
 </IfModule>

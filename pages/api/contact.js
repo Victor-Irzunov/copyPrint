@@ -1,14 +1,19 @@
-import multer from 'multer'
-import fs from 'fs'
-import nodemailer from 'nodemailer'
+// import multer from 'multer'
+// import fs from 'fs'
+// import nodemailer from 'nodemailer'
+const multer = require('multer')
+const fs = require('fs')
+const nodemailer = require('nodemailer')
+
 const upload = multer({ dest: 'uploads/' })
-export const config = {
+
+const config = {
   api: {
     bodyParser: false
   }
 }
 //если 500 смотри пароли приложений
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   try {
     console.log('----1')
     await new Promise((resolve, reject) => {
@@ -102,3 +107,7 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Ошибка в отправке сообщения' });
   }
 }
+module.exports = {
+  handler,
+  config
+};
